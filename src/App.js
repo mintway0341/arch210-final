@@ -12,6 +12,8 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Suspense } from "react";
 import { DDSLoader } from "three-stdlib";
 import { TypeAnimation } from "react-type-animation";
+import { BsArrowDownCircle } from "react-icons/bs";
+import styled from "styled-components";
 import {
   motion,
   useScroll,
@@ -34,6 +36,9 @@ import sitePlan from "./assets/Site-Plan.png";
 import sectionA from "./assets/Section-A.png";
 import sectionB from "./assets/Section-B.png";
 
+const moveToContent = (ref) => {
+  ref.current?.scrollIntoView({ behavior: "smooth" });
+};
 THREE.DefaultLoadingManager.addHandler(/\.dds$/i, new DDSLoader());
 
 const Scene = () => {
@@ -51,7 +56,22 @@ const Scene = () => {
 };
 
 const App = () => {
+  const ref1 = useRef(null);
   const { scrollYProgress, scrollY } = useScroll();
+  const opacity1 = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
+  const opacity2 = useTransform(scrollYProgress, [0.06, 0.12], [0, 1]);
+  const opacity3 = useTransform(scrollYProgress, [0.12, 0.18], [0, 1]);
+  const opacity4 = useTransform(scrollYProgress, [0.18, 0.24], [0, 1]);
+  const opacity5 = useTransform(scrollYProgress, [0.24, 0.3], [0, 1]);
+  const opacity6 = useTransform(scrollYProgress, [0.3, 0.36], [0, 1]);
+  const opacity7 = useTransform(scrollYProgress, [0.36, 0.42], [0, 1]);
+  const opacity8 = useTransform(scrollYProgress, [0.42, 0.48], [0, 1]);
+  const opacity9 = useTransform(scrollYProgress, [0.48, 0.54], [0, 1]);
+  const opacity10 = useTransform(scrollYProgress, [0.6, 0.66], [0, 1]);
+  const opacity11 = useTransform(scrollYProgress, [0.7, 0.76], [0, 1]);
+  const opacity12 = useTransform(scrollYProgress, [0.8, 0.86], [0, 1]);
+  const opacity13 = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
+  const opacity14 = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
   return (
     <div
       style={{
@@ -123,25 +143,83 @@ const App = () => {
         />
         <Scene />
       </Canvas>
-      <img src={view1} style={{ width: "90vw", marginTop: "5vh" }} />
-      <img src={view2} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={view3} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={elevationS} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={elevationW} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={conceptDiagram} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img
-        src={circulationDiagram}
-        style={{ width: "90vw", marginTop: "10vh" }}
+      <GoDownIcon
+        onClick={() => {
+          moveToContent(ref1);
+        }}
+        style={{ zIndex: 102, marginBottom: "40vh" }}
       />
-      <img src={programDiagram} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={explodedDiagram} style={{ width: "90vw", marginTop: "0vh" }} />
-      <img src={floorPlan1} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={floorPlan2} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={sitePlan} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={sectionA} style={{ width: "90vw", marginTop: "10vh" }} />
-      <img src={sectionB} style={{ width: "90vw", marginTop: "10vh" }} />
+      <motion.img
+        ref={ref1}
+        src={view1}
+        style={{ opacity: opacity1, width: "90vw", marginTop: "5vh" }}
+      />
+      <motion.img
+        src={view2}
+        style={{ opacity: opacity2, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={view3}
+        style={{ opacity: opacity3, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={elevationS}
+        style={{ opacity: opacity4, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={elevationW}
+        style={{ opacity: opacity5, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={conceptDiagram}
+        style={{ opacity: opacity6, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={circulationDiagram}
+        style={{ opacity: opacity7, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={programDiagram}
+        style={{ opacity: opacity8, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={explodedDiagram}
+        style={{ opacity: opacity9, width: "90vw", marginTop: "0vh" }}
+      />
+      <motion.img
+        src={floorPlan1}
+        style={{ opacity: opacity10, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={floorPlan2}
+        style={{ opacity: opacity11, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={sitePlan}
+        style={{ opacity: opacity12, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={sectionA}
+        style={{ opacity: opacity13, width: "90vw", marginTop: "10vh" }}
+      />
+      <motion.img
+        src={sectionB}
+        style={{ opacity: opacity14, width: "90vw", marginTop: "10vh" }}
+      />
     </div>
   );
 };
 
 export default App;
+
+const GoDownIcon = styled(BsArrowDownCircle)`
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 5vh;
+  left: 50%;
+  transform: translate(-50%);
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+`;
