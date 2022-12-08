@@ -12,6 +12,13 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Suspense } from "react";
 import { DDSLoader } from "three-stdlib";
 import { TypeAnimation } from "react-type-animation";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useViewportScroll,
+} from "framer-motion";
 import view1 from "./assets/3D-View-1.png";
 import view2 from "./assets/3D-View-2.png";
 import view3 from "./assets/3D-View-3.png";
@@ -44,6 +51,7 @@ const Scene = () => {
 };
 
 const App = () => {
+  const { scrollYProgress, scrollY } = useScroll();
   return (
     <div
       style={{
@@ -54,6 +62,18 @@ const App = () => {
         paddingBottom: "100px",
       }}
     >
+      <motion.div
+        style={{
+          position: "sticky",
+          top: 0,
+          width: "100vw",
+          height: "10px",
+          backgroundColor: "#42FF91",
+          scaleX: scrollYProgress,
+          transformOrigin: "0%",
+          zIndex: 100,
+        }}
+      />
       {/* <p
         style={{ color: "white", marginTop: 50, fontWeight: 700, fontSize: 80 }}
       >
